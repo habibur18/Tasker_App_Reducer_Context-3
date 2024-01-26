@@ -5,7 +5,12 @@ import TaskSearch from "./TaskSearch";
 
 export default function TaskBoard({}) {
   const { setModalState } = useContext(ModalState);
-  const { state, dispatch } = useContext(TasksContext);
+  const { state, dispatch, search, searchText } = useContext(TasksContext);
+  let tasksToRender = state;
+
+  if (searchText.length > 0) {
+    tasksToRender = search;
+  }
 
   return (
     <section className="mb-20" id="tasks">
@@ -15,7 +20,7 @@ export default function TaskBoard({}) {
             <h2 className="text-2xl font-semibold max-sm:mb-4">Your Tasks</h2>
             <TaskSearch />
           </div>
-          <div className="overflow-auto">{state.length > 0 ? <TaskList tasks={state} /> : <p className="text-center text-gray-400">No tasks found</p>}</div>
+          <div className="overflow-auto"> {tasksToRender.length > 0 ? <TaskList tasks={tasksToRender} /> : <p className="text-center text-gray-400">No tasks found</p>}</div>
         </div>
       </div>
     </section>
