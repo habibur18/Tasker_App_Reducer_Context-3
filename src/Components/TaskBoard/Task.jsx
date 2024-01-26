@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { toast } from "react-toastify";
 import { ModalState, TasksContext } from "../../Context/Index";
 
 export default function Task({ task }) {
@@ -7,7 +8,12 @@ export default function Task({ task }) {
   const { state, dispatch, setUpdatedTask } = useContext(TasksContext);
   const [colors, setColors] = useState(null);
   const handleDeleteTask = (taskId) => {
-    dispatch({ type: "DELETE_TASK", payload: taskId });
+    if (window.confirm("Are you sure you want to delete this task?")) {
+      setTimeout(() => {
+        dispatch({ type: "DELETE_TASK", payload: taskId });
+        toast.success("Task deleted successfully");
+      }, 500);
+    }
   };
   const getRandomColor = () => {
     const letters = "0123456789ABCDEF";
@@ -18,7 +24,13 @@ export default function Task({ task }) {
     setColors(color);
   };
   const handleToggleTask = (taskId) => {
-    dispatch({ type: "TOGGLE_TASK", payload: taskId });
+    if (!isFavorite) {
+      dispatch({ type: "TOGGLE_TASK", payload: taskId });
+      toast.success("Task added to favorites");
+    } else {
+      dispatch({ type: "TOGGLE_TASK", payload: taskId });
+      toast.success("Task removed from favorites");
+    }
   };
   const handleUpdateTask = (task) => {
     setUpdatedTask(task);

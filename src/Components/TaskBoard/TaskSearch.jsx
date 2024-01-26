@@ -1,11 +1,19 @@
 import React, { useContext } from "react";
+import { toast } from "react-toastify";
 import { ModalState, TasksContext } from "../../Context/Index";
 
 export default function TaskSearch() {
   const { setModalState } = useContext(ModalState);
-  const { dispatch, setUpdatedTask, setSearchText } = useContext(TasksContext);
+  const { state, dispatch, setUpdatedTask, setSearchText } = useContext(TasksContext);
   const handleDeleteAllTasks = () => {
-    dispatch({ type: "DELETE_ALL_TASKS" });
+    if (state.length > 0) {
+      if (window.confirm("Are you sure you want to delete all tasks?")) {
+        setTimeout(() => {
+          dispatch({ type: "DELETE_ALL_TASKS" });
+          toast.success("All tasks deleted successfully");
+        }, 500);
+      }
+    }
   };
   const handleInputChange = (event) => {
     const searchText = event.target.value;

@@ -1,4 +1,6 @@
 import { useEffect, useReducer, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Footer from "./Components/Footer";
 import HeroSection from "./Components/HeroSection";
@@ -32,6 +34,7 @@ function App() {
           <HeroSection />
           <TaskBoard />
           <Footer />
+          <ToastContainer />
         </TasksContext.Provider>
       </ModalState.Provider>
     </>

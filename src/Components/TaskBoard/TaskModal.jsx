@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import { ModalState, TasksContext } from "../../Context/Index";
 
 export default function TaskModal() {
@@ -36,8 +37,11 @@ export default function TaskModal() {
     event.preventDefault();
     if (updatedTask) {
       dispatch({ type: "EDIT_TASK", payload: formData });
+      setUpdatedTask(null);
+      toast.success("Task updated successfully");
     } else {
       dispatch({ type: "ADD_TASK", payload: formData });
+      toast.success("Task added successfully");
     }
     setModalState(false);
     setUpdatedTask(null);
