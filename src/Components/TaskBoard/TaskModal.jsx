@@ -42,7 +42,7 @@ export default function TaskModal() {
     setModalState(false);
     setUpdatedTask(null);
   };
-
+  console.log(formData.priority);
   return (
     <div className="fixed inset-0 z-50 bg-slate-800/80">
       <form onSubmit={handleSubmit} ref={ref} className="mx-auto my-10 w-full max-w-[740px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-9 max-md:px-4 lg:my-20 lg:p-11">
@@ -67,7 +67,7 @@ export default function TaskModal() {
 
             <div className="space-y-2 lg:space-y-3">
               <label htmlFor="priority">Priority</label>
-              <select value={formData.priority} onChange={handleInput} className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5" name="priority" id="priority" required>
+              <select value={formData.priority.toLowerCase()} onChange={handleInput} className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5" name="priority" id="priority" required>
                 <option value="">Select Priority</option>
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
